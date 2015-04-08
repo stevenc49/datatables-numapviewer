@@ -39,19 +39,14 @@
 					]
 				} ); 
 			
-			}
+			}			
 		
-			//featuresResponse.forEach(function(arr){console.log(arr.attributes)})
-			//featuresResponse.forEach(function(arr){console.log(obj2array(arr.attributes))})
-			//featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
-			
-		
-			//get real dataSet from ArcGIS
+			//get dataSet from ArcGIS
 			$.ajax({
 				type: 'GET',
 				dataType: "jsonp",
 				timeout: 60000,
-				url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT+&f=pjson",
+				url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT%2CDISTRICT%2CISSUE_DATE%2CLAPSE_DATE%2CRECORD_DT%2CANNIV_DT%2CCLAIM_ACRE%2COWNERS%2CCLAIM_NAME&f=pjson",
 				success: function (responseData, textStatus, jqXHR) {
 					
 					featuresResponse = responseData.features;												//extract the "attributes" Object
@@ -64,12 +59,6 @@
 					alert('failed');
 				}
 			});
-			
-			//the sample dataSet
-			var dataSet = [
-				['Trident','Internet Explorer 4.0','Win 95+','4','X'],
-				['Trident','Internet Explorer 5.0','Win 95+','5','C']
-			];
 			
 			//the datatable
 			$(document).ready(function() {
