@@ -44,6 +44,10 @@
 			
 			//helper function
 			var convertDate = function(date) {
+			
+				if(date==null)
+					return "";
+			
 				return new Date(date).toString("yyyy-MM-dd");
 			};
 		
@@ -58,11 +62,14 @@
 					//extract the "attributes" Object
 					featuresResponse = responseData.features;
 					
-					//featuresResponse.forEach(function(arr){console.log(arr.attributes.CLAIM_NUM)})
-					//featuresResponse.forEach(function(arr){console.log(arr.attributes.ISSUE_DATE)})
+					//convert dates
+					featuresResponse.forEach(function(obj){obj.attributes.ISSUE_DATE=convertDate(obj.attributes.ISSUE_DATE)})
+					featuresResponse.forEach(function(obj){obj.attributes.LAPSE_DATE=convertDate(obj.attributes.LAPSE_DATE)})
+					featuresResponse.forEach(function(obj){obj.attributes.RECORD_DT=convertDate(obj.attributes.RECORD_DT)})
+					featuresResponse.forEach(function(obj){obj.attributes.ANNIV_DT=convertDate(obj.attributes.ANNIV_DT)})
 					
 					//convert each attribute object to an array and push into feedToTable
-					featuresResponse.forEach(function(obj){obj.attributes.ISSUE_DATE=convertDate(obj.attributes.ISSUE_DATE)})
+					featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
 										
 					//re-draw table
 					drawTable(); 
