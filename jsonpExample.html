@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<!-- jquery -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		
+		<!-- bootstrap -->
+		<!--
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		-->
+		
+		<script>
+
+			var workflow1 = "wellBcgsMapsheetsWf";
+			var workflow2 = "wellLocationWf";		
+			
+			function callWorkflow(elementToUpdate, workflow) {
+				$.ajax({
+					type: 'GET',
+					dataType: "jsonp",
+					timeout: 60000,
+					url: "http://orca1.pacificgeotech.local/Geocortex/Essentials/REST/sites/epermit/workflows/" + workflow + "/run?f=pjson",
+					success: function (responseData, textStatus, jqXHR) {
+					
+						/*
+						if(workflow=="areaOverlappingLandActLicenseWf") {
+							alert(responseData);
+							console.log("....................." + JSON.stringify(responseData));
+						}*/
+					
+						$(elementToUpdate).val(JSON.stringify(responseData))
+						
+						//console.log("http://orca1.pacificgeotech.local/Geocortex/Essentials/REST/sites/epermitDev/workflows/" + workflow + "/run?f=pjson");
+						
+						console.log(responseData);
+					},
+					error: function (responseData, textStatus, errorThrown) {
+						$(elementToUpdate).val('timed out');
+					}
+				});
+			}
+			
+			callWorkflow("#workflowResponse1", workflow1);
+			callWorkflow("#workflowResponse2", workflow2);
+			
+			//setInterval(function () {console.log("Hello")}, 1000);
+			
+		</script>
+	
+	</head>
+	<body>
+	
+		<table border="1">
+			<tr>
+				<th>Workflow</th>
+				<th>Workflow Response</th>
+			</tr>
+			<tr>
+				<td>wellBcgsMapsheetsWf</td>
+				<td><textarea id="workflowResponse1" rows="5" cols="175">querying...</textarea></td>
+			</tr>
+			<tr>
+				<td>wellLocationWf</td>
+				<td><textarea id="workflowResponse2" rows="5" cols="175">querying...</textarea></td>
+			</tr>
+			
+		</table>
+
+	</body>
+
+</html>
