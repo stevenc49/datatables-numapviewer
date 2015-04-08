@@ -11,15 +11,19 @@
 		<!-- JS Logic -->
 		<script type="text/javascript" class="init">
 
-			//get real dataSet from ArcGIS REST Server
+			var newArray = [];
+		
+			//get real dataSet from ArcGIS
 			$.ajax({
 				type: 'GET',
 				dataType: "jsonp",
 				timeout: 60000,
 				url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT+&f=pjson",
 				success: function (responseData, textStatus, jqXHR) {
-				
-					alert('success');
+					
+					featuresResponse = responseData.features;
+					
+					//console.log(JSON.stringify(responseData));
 				},
 				error: function (responseData, textStatus, errorThrown) {
 					alert('failed');
