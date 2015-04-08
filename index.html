@@ -14,11 +14,12 @@
 			//variables
 			var feedToTable = [];
 			
-			//helper functions
+			//helper function
 			var obj2array = function(obj) {
 				return Object.keys(obj).map(function (key) {return obj[key]});
 			}
 		
+			//helper function
 			var drawTable = function() {
 			
 				$('#demo').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
@@ -49,8 +50,11 @@
 				url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT%2CDISTRICT%2CISSUE_DATE%2CLAPSE_DATE%2CRECORD_DT%2CANNIV_DT%2CCLAIM_ACRE%2COWNERS%2CCLAIM_NAME&f=pjson",
 				success: function (responseData, textStatus, jqXHR) {
 					
-					featuresResponse = responseData.features;												//extract the "attributes" Object
-					featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})	//convert each attribute object to an array and push into feedToTable
+					//extract the "attributes" Object
+					featuresResponse = responseData.features;
+					
+					//convert each attribute object to an array and push into feedToTable
+					featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
 										
 					//re-draw table
 					drawTable(); 
