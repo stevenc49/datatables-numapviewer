@@ -58,8 +58,11 @@
 					//extract the "attributes" Object
 					featuresResponse = responseData.features;
 					
+					//featuresResponse.forEach(function(arr){console.log(arr.attributes.CLAIM_NUM)})
+					//featuresResponse.forEach(function(arr){console.log(arr.attributes.ISSUE_DATE)})
+					
 					//convert each attribute object to an array and push into feedToTable
-					featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
+					featuresResponse.forEach(function(obj){obj.attributes.ISSUE_DATE=convertDate(obj.attributes.ISSUE_DATE)})
 										
 					//re-draw table
 					drawTable(); 
