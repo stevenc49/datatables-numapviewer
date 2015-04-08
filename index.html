@@ -21,7 +21,7 @@
 		
 			//featuresResponse.forEach(function(arr){console.log(arr.attributes)})
 			//featuresResponse.forEach(function(arr){console.log(obj2array(arr.attributes))})
-			featuresResponse.forEach(function(arr){newArray.push(obj2array(arr.attributes))})		//do magic
+			//featuresResponse.forEach(function(arr){newArray.push(obj2array(arr.attributes))})
 			
 		
 			//get real dataSet from ArcGIS
@@ -32,7 +32,8 @@
 				url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT+&f=pjson",
 				success: function (responseData, textStatus, jqXHR) {
 					
-					featuresResponse = responseData.features;
+					featuresResponse = responseData.features;											//extract the "attributes" Object
+					featuresResponse.forEach(function(arr){newArray.push(obj2array(arr.attributes))})	//convert attribute objects to arrays
 					
 					//console.log(JSON.stringify(responseData));
 				},
