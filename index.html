@@ -11,7 +11,18 @@
 		<!-- JS Logic -->
 		<script type="text/javascript" class="init">
 
+			
+			
 			var newArray = [];
+			
+			var obj2array = function(obj) {
+				return Object.keys(obj).map(function (key) {return obj[key]});
+			}
+		
+			//featuresResponse.forEach(function(arr){console.log(arr.attributes)})
+			//featuresResponse.forEach(function(arr){console.log(obj2array(arr.attributes))})
+			featuresResponse.forEach(function(arr){newArray.push(obj2array(arr.attributes))})		//do magic
+			
 		
 			//get real dataSet from ArcGIS
 			$.ajax({
