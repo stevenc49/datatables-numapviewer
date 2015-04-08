@@ -13,7 +13,7 @@
 
 			
 			
-			var newArray = [];
+			var feedToTable = [];
 			
 			var obj2array = function(obj) {
 				return Object.keys(obj).map(function (key) {return obj[key]});
@@ -21,7 +21,7 @@
 		
 			//featuresResponse.forEach(function(arr){console.log(arr.attributes)})
 			//featuresResponse.forEach(function(arr){console.log(obj2array(arr.attributes))})
-			//featuresResponse.forEach(function(arr){newArray.push(obj2array(arr.attributes))})
+			//featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
 			
 		
 			//get real dataSet from ArcGIS
@@ -32,10 +32,19 @@
 				url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT+&f=pjson",
 				success: function (responseData, textStatus, jqXHR) {
 					
-					featuresResponse = responseData.features;											//extract the "attributes" Object
-					featuresResponse.forEach(function(arr){newArray.push(obj2array(arr.attributes))})	//convert attribute objects to arrays
-					
-					//console.log(JSON.stringify(responseData));
+					featuresResponse = responseData.features;												//extract the "attributes" Object
+					featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})	//convert each attribute object to an array and push into feedToTable
+										
+					//re-draw table
+					$('#demo').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
+				 
+					$('#example').dataTable( {
+						"data": feedToTable,
+						"columns": [
+							{ "title": "Engine" },
+							{ "title": "Browser" }
+						]
+					} );   
 				},
 				error: function (responseData, textStatus, errorThrown) {
 					alert('failed');
@@ -53,13 +62,10 @@
 				$('#demo').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
 			 
 				$('#example').dataTable( {
-					"data": dataSet,
+					"data": feedToTable,
 					"columns": [
 						{ "title": "Engine" },
-						{ "title": "Browser" },
-						{ "title": "Platform" },
-						{ "title": "Version", "class": "center" },
-						{ "title": "Grade", "class": "center" }
+						{ "title": "Browser" }
 					]
 				} );   
 			} );
