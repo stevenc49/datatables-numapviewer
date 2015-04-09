@@ -96,13 +96,13 @@
 				$('#example').dataTable( {
 					"data": feedToTable,
 					"columns": [
-						{ "title": "Claim Number" },
-						{ "title": "Claim Status" },
+						{ "title": "Lease Number" },
+						{ "title": "Lease Status" },
 						{ "title": "District" },
 						{ "title": "Issue Date" },
 						{ "title": "Cancelled Date" },
-						{ "title": "Recorded Date" },
-						{ "title": "Anniversary Date" },
+						{ "title": "Rent Due Date" },
+						{ "title": "Term Cancelled Date" },
 						{ "title": "Area (Ha)" },
 						{ "title": "Owner Name" },
 						{ "title": "Claim Name" }
@@ -134,7 +134,7 @@
 						featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
 											
 						//re-draw table
-						drawLayer4Table(); 
+						drawLayer7Table(); 
 					},
 					error: function (responseData, textStatus, errorThrown) {
 						alert('failed');
