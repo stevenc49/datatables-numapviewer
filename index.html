@@ -146,6 +146,13 @@
 				});
 			}
 			
+			//event listeners
+			var selectLayer = function() {
+				
+				var selectedLayer = $('#layersDropdown').val();
+				alert(selectedLayer);
+			}
+			
 			//show a default layer
 			loadLayer4();
 			
@@ -162,15 +169,14 @@
 	
 		<!-- Label -->
 		<strong>
-			<label for="cboLayers" id="lblLayers">Layers:</label>
+			<label for="layersDropdown" id="lblLayers">Layers:</label>
 		</strong>
 		
 		<!-- Dropdown -->
-		<select id="cboLayers" name="cboLayers">
+		<select id="layersDropdown" onchange="selectLayer()">
 			<option value="layer4">Mineral Claim - Active</option>
 			<option value="layer7">Mineral Lease</option>
 		</select>
-
 		
 		<p/>
 		
