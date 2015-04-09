@@ -37,9 +37,11 @@
 			//layer 4
 			var drawLayer4Table = function() {
 			
-				$('#demo').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
+				//remove old table
+				$('#tableContainer').empty();
+				$('#tableContainer').append('<table cellpadding="0" cellspacing="0" border="0" class="display" id="theListTable"></table>');
 			 
-				$('#example').dataTable( {
+				$('#theListTable').dataTable( {
 					"data": feedToTable,
 					"columns": [
 						{ "title": "Claim Number" },
@@ -91,9 +93,11 @@
 			//layer 7
 			var drawLayer7Table = function() {
 			
-				$('#demo').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
+				//remove old table
+				$('#tableContainer').empty();
+				$('#tableContainer').append('<table cellpadding="0" cellspacing="0" border="0" class="display" id="theListTable"></table>');
 			 
-				$('#example').dataTable( {
+				$('#theListTable').dataTable( {
 					"data": feedToTable,
 					"columns": [
 						{ "title": "Lease Number" },
@@ -147,7 +151,7 @@
 			
 			//the datatable
 			$(document).ready(function() {
-				drawLayer7Table();
+				drawLayer4Table();
 			} );
 		
 		</script>
@@ -171,7 +175,10 @@
 		<p/>
 		
 		<!-- DataTable Div -->
-		<div id="demo">
+		<!--The Table -->
+		<div id="tableContainer">
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="theListTable"></table>
+		</div>
 	
 	</body>
 
