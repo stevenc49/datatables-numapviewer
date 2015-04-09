@@ -19,9 +19,23 @@
 			var obj2array = function(obj) {
 				return Object.keys(obj).map(function (key) {return obj[key]});
 			};
+			
+			//helper function
+			var convertDate = function(date) {
+			
+				if(date==null)
+					return "";
+			
+				return new Date(date).toString("yyyy-MM-dd");
+			};
 		
 			//helper function
-			var drawTable = function() {
+			var roundToTwo = function(num) {    
+				return +(Math.round(num + "e+2")  + "e-2");
+			}
+
+			//helper function
+			var drawLayer4Table = function() {
 			
 				$('#demo').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"></table>' );
 			 
@@ -42,22 +56,8 @@
 				} );
 			};
 			
-			//helper function
-			var convertDate = function(date) {
-			
-				if(date==null)
-					return "";
-			
-				return new Date(date).toString("yyyy-MM-dd");
-			};
-		
-			//helper function
-			var roundToTwo = function(num) {    
-				return +(Math.round(num + "e+2")  + "e-2");
-			}
-
 			//load layers
-			var loadLayerMineralClaimActive = function() {
+			var loadLayer4 = function() {
 				$.ajax({
 					type: 'GET',
 					dataType: "jsonp",
@@ -81,7 +81,7 @@
 						featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
 											
 						//re-draw table
-						drawTable(); 
+						drawLayer4Table(); 
 					},
 					error: function (responseData, textStatus, errorThrown) {
 						alert('failed');
@@ -90,11 +90,11 @@
 			}
 			
 			//show a default layer
-			loadLayerMineralClaimActive();
+			loadLayer4();
 			
 			//the datatable
 			$(document).ready(function() {
-				drawTable();
+				drawLayer4Table();
 			} );
 		
 		</script>
