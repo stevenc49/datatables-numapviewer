@@ -1,20 +1,21 @@
 <html>
 
 	<head>
+
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 		
 		<!-- JS -->
-		<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" language="javascript" src="date.js"></script>
+		<script type="text/javascript" language="javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" language="javascript" src="js/date.js"></script>
 		
 		<!-- JS Logic -->
 		<script type="text/javascript" class="init">
 
 			//variables
 			var feedToTable = [];
-			var mapServiceUrl = 'http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer';
+			var mapServiceUrl = 'http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer';		// Nampreet: change this URL when you deploy
 			
 			//helper function
 			var obj2array = function(obj) {
