@@ -55,37 +55,42 @@
 			var roundToTwo = function(num) {    
 				return +(Math.round(num + "e+2")  + "e-2");
 			}
-		
-			//get dataSet from ArcGIS
-			$.ajax({
-				type: 'GET',
-				dataType: "jsonp",
-				timeout: 60000,
-				url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT%2CDISTRICT%2CISSUE_DATE%2CLAPSE_DATE%2CRECORD_DT%2CANNIV_DT%2CCLAIM_ACRE%2COWNERS%2CCLAIM_NAME&f=pjson",
-				success: function (responseData, textStatus, jqXHR) {
-					
-					//extract the "attributes" Object
-					featuresResponse = responseData.features;
-					
-					//convert dates
-					featuresResponse.forEach(function(obj){obj.attributes.ISSUE_DATE=convertDate(obj.attributes.ISSUE_DATE)})
-					featuresResponse.forEach(function(obj){obj.attributes.LAPSE_DATE=convertDate(obj.attributes.LAPSE_DATE)})
-					featuresResponse.forEach(function(obj){obj.attributes.RECORD_DT=convertDate(obj.attributes.RECORD_DT)})
-					featuresResponse.forEach(function(obj){obj.attributes.ANNIV_DT=convertDate(obj.attributes.ANNIV_DT)})
-					
-					//round area
-					featuresResponse.forEach(function(obj){obj.attributes.CLAIM_ACRE=roundToTwo(obj.attributes.CLAIM_ACRE)})
-					
-					//convert each attribute object to an array and push into feedToTable
-					featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
-										
-					//re-draw table
-					drawTable(); 
-				},
-				error: function (responseData, textStatus, errorThrown) {
-					alert('failed');
-				}
-			});
+
+			//load layers
+			var loadLayerMineralClaimActive = function() {
+				$.ajax({
+					type: 'GET',
+					dataType: "jsonp",
+					timeout: 60000,
+					url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT%2CDISTRICT%2CISSUE_DATE%2CLAPSE_DATE%2CRECORD_DT%2CANNIV_DT%2CCLAIM_ACRE%2COWNERS%2CCLAIM_NAME&f=pjson",
+					success: function (responseData, textStatus, jqXHR) {
+						
+						//extract the "attributes" Object
+						featuresResponse = responseData.features;
+						
+						//convert dates
+						featuresResponse.forEach(function(obj){obj.attributes.ISSUE_DATE=convertDate(obj.attributes.ISSUE_DATE)})
+						featuresResponse.forEach(function(obj){obj.attributes.LAPSE_DATE=convertDate(obj.attributes.LAPSE_DATE)})
+						featuresResponse.forEach(function(obj){obj.attributes.RECORD_DT=convertDate(obj.attributes.RECORD_DT)})
+						featuresResponse.forEach(function(obj){obj.attributes.ANNIV_DT=convertDate(obj.attributes.ANNIV_DT)})
+						
+						//round area
+						featuresResponse.forEach(function(obj){obj.attributes.CLAIM_ACRE=roundToTwo(obj.attributes.CLAIM_ACRE)})
+						
+						//convert each attribute object to an array and push into feedToTable
+						featuresResponse.forEach(function(arr){feedToTable.push(obj2array(arr.attributes))})
+											
+						//re-draw table
+						drawTable(); 
+					},
+					error: function (responseData, textStatus, errorThrown) {
+						alert('failed');
+					}
+				});
+			}
+			
+			//show a default layer
+			loadLayerMineralClaimActive();
 			
 			//the datatable
 			$(document).ready(function() {
