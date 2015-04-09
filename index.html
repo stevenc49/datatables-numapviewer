@@ -66,6 +66,9 @@
 					url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/4/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=CLAIM_NUM%2CCLAIM_STAT%2CDISTRICT%2CISSUE_DATE%2CLAPSE_DATE%2CRECORD_DT%2CANNIV_DT%2CCLAIM_ACRE%2COWNERS%2CCLAIM_NAME&f=pjson",
 					success: function (responseData, textStatus, jqXHR) {
 						
+						//clear dataSet
+						feedToTable.length = 0;
+						
 						//extract the "attributes" Object
 						featuresResponse = responseData.features;
 						
@@ -122,6 +125,9 @@
 					url: "http://www.mapconnect.com/arcgis/rest/services/test/nms/MapServer/7/query?text=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=1%3D1&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=false&maxAllowableOffset=&outSR=&outFields=LEASE_NUM%2CLEASE_STAT%2CDISTRICT%2CISSUED_DT%2CEXPIRES_DT%2CRENT_DUE_DATE%2CTERM_EXPIRY_DATE%2CLEASE_ACRE%2COWNERS%2CCLAIM_NAME&f=pjson",
 					success: function (responseData, textStatus, jqXHR) {
 						
+						//clear dataSet
+						feedToTable.length = 0;
+						
 						//extract the "attributes" Object
 						featuresResponse = responseData.features;
 						
@@ -150,7 +156,11 @@
 			var selectLayer = function() {
 				
 				var selectedLayer = $('#layersDropdown').val();
-				alert(selectedLayer);
+				
+				if(selectedLayer=="layer4")
+					loadLayer4();
+				else if(selectedLayer=="layer7")
+					loadLayer7();
 			}
 			
 			//show a default layer
